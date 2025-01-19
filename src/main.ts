@@ -13,7 +13,7 @@ function generateGradient(percent: number) {
 function hms(seconds: number) {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
-  const secondsRemaining = seconds % 60;
+  const secondsRemaining = Math.floor(seconds % 60);
   return `${hours}h ${minutes}m ${secondsRemaining}s`;
 }
 
@@ -102,12 +102,12 @@ class Clock {
           return
         }
 
-        this.doneTime += Math.floor((Date.now() - lastTime) / 1000);
+        this.doneTime += ((Date.now() - lastTime) / 1000);
         lastTime = Date.now();
         this.inside.textContent = hms(this.doneTime);
         this.circle.style.background = generateGradient(this.doneTime / this.totalTime * 100);
 
-      }, 1000); // TODO: MULTIPLY BY 60 to make it minutes
+      }, 1000);
     } else {
       localStorage.setItem(this.name, JSON.stringify({ doneTime: this.doneTime, totalTime: this.totalTime }));
       this.startButton.className = "start";
