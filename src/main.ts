@@ -93,6 +93,7 @@ class Clock {
       this.startButton.innerText = "Stop";
       this.running = true;
       localStorage.setItem(this.name, JSON.stringify({ doneTime: this.doneTime, totalTime: this.totalTime, dueAddStart: Math.floor(Date.now() / 1000) }));
+      let lastTime = Date.now();
       const interval = setInterval(() => {
 
         if (!this.running) {
@@ -101,7 +102,8 @@ class Clock {
           return
         }
 
-        this.doneTime++;
+        this.doneTime += Math.floor((Date.now() - lastTime) / 1000);
+        lastTime = Date.now();
         this.inside.textContent = hms(this.doneTime);
         this.circle.style.background = generateGradient(this.doneTime / this.totalTime * 100);
 
