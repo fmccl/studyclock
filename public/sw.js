@@ -1,10 +1,6 @@
 var APP_PREFIX = 'ApplicationName_'     // Identifier for this app (this needs to be consistent across every cache update)
 var VERSION = 'version_01'              // Version of the off-line cache (change this value everytime you want to update cache)
 var CACHE_NAME = APP_PREFIX + VERSION
-var URLS = [                            // Add URL you want to cache in this list.
-    '/{repository}/',                     // If you have separate JS/CSS files,
-    '/{repository}/index.html'            // add path to those files here
-]
 
 // Respond with cached resources
 self.addEventListener('fetch', function (e) {
@@ -21,16 +17,6 @@ self.addEventListener('fetch', function (e) {
 
             // You can omit if/else for console.log & put one line below like this too.
             // return request || fetch(e.request)
-        })
-    )
-})
-
-// Cache resources
-self.addEventListener('install', function (e) {
-    e.waitUntil(
-        caches.open(CACHE_NAME).then(function (cache) {
-            console.log('installing cache : ' + CACHE_NAME)
-            return cache.addAll(URLS)
         })
     )
 })
