@@ -52,7 +52,7 @@ class Clock {
     clock.classList.add("clock");
 
     const h2 = document.createElement("h2");
-    h2.textContent = name;
+    h2.textContent = `${name} (${totalTime / 3600}h)`;
     clock.appendChild(h2);
 
     this.circle = document.createElement("div");
